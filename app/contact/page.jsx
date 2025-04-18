@@ -59,7 +59,7 @@ export default function ContactUs() {
               placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
               required
             />
             <input
@@ -68,7 +68,7 @@ export default function ContactUs() {
               placeholder="Your Email"
               value={formData.email}
               onChange={handleChange}
-              className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
               required
             />
           </div>
@@ -79,7 +79,7 @@ export default function ContactUs() {
             placeholder="Subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
             required
           />
 
@@ -89,13 +89,13 @@ export default function ContactUs() {
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
             required
           />
 
           <button
             type="submit"
-            className="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-50"
+            className="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-50"
           >
             Send Message
           </button>

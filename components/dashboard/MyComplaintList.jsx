@@ -41,61 +41,71 @@ const MyComplaintList = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 gap-6">
-      {complaints.map((complaint) => (
-        <Card key={complaint._id} className="p-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900">
-                {complaint.title}
-              </h2>
-              <p className="text-sm text-gray-600 mt-1">
-                {complaint.description}
-              </p>
-              <p className="text-xs text-gray-400 mt-2">
-                Date:{" "}
-                {new Date(complaint.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
-              <div className="mt-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-1"
-                  onClick={() =>
-                    router.push(`/dashboard/mycomplaints/${complaint._id}`)
-                  }
+    <div>
+      {complaints.length === 0 ? (
+        <div className="text-center text-gray-500 mt-10 text-lg font-medium">
+          😇 No complaints submitted by you yet.
+          <p className="text-sm text-gray-400 mt-2">Start by raising a concern to make a difference!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6">
+          {complaints.map((complaint) => (
+            <Card key={complaint._id} className="p-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    {complaint.title}
+                  </h2>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {complaint.description}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-2">
+                    Date:{" "}
+                    {new Date(complaint.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                  <div className="mt-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center gap-1"
+                      onClick={() =>
+                        router.push(`/dashboard/mycomplaints/${complaint._id}`)
+                      }
+                    >
+                      <Eye className="h-4 w-4" />
+                      View Details
+                    </Button>
+                  </div>
+                </div>
+                <span
+                  className={`text-sm px-3 py-1 rounded-full ${
+                    complaint?.status === "pending"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : complaint?.status === "in-progress"
+                      ? "bg-blue-100 text-blue-800"
+                      : complaint?.status === "completed"
+                      ? "bg-green-100 text-green-800"
+                      : complaint?.status === "rejected"
+                      ? "bg-red-100 text-red-800"
+                      : complaint?.status === "approved"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-gray-100 text-gray-800"
+                  }`}
                 >
-                  <Eye className="h-4 w-4" />
-                  View Details
-                </Button>
+                  {complaint?.status}
+                </span>
               </div>
-            </div>
-            <span
-              className={`text-sm px-3 py-1 rounded-full ${
-                complaint?.status === "pending"
-                  ? "bg-yellow-100 text-yellow-800"
-                  : complaint?.status === "in-progress"
-                  ? "bg-blue-100 text-blue-800" : 
-                    complaint?.status === "completed"
-                  ? "bg-green-100 text-green-800"
-                  : complaint?.status === "rejected"
-                  ? "bg-red-100 text-red-800"
-                  : complaint?.status === "approved"
-                  ? "bg-green-100 text-green-800"
-                  : "bg-green-100 text-green-800"
-              }`}
-            >
-              {complaint?.status}
-            </span>
-          </div>
-        </Card>
-      ))}
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
+  
 };
 
 export default MyComplaintList;

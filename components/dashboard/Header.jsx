@@ -77,15 +77,20 @@ export default function Header() {
             {userData.name?.[0]}
           </div>
           {menuOpen && (
-            <div className="absolute right-0 mt-18 bg-white border border-gray-200 rounded-lg shadow-lg w-40">
-              <button
-                onClick={handleLogout} // Logout action
-                className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
-              >
-                Logout
-              </button>
-            </div>
-          )}
+  <div className="absolute top-9 right-[-12px] bg-white border border-gray-200 rounded-lg shadow-lg w-56 p-2">
+    <div className="px-4 py-2 text-sm text-gray-700 border-b">
+      <p className="font-medium">{userData.name}</p>
+      <p className="text-xs text-gray-500 truncate">{userData.email}</p>
+    </div>
+    <button
+      onClick={handleLogout}
+      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+    >
+      Logout
+    </button>
+  </div>
+)}
+
           <div className="hidden md:block">
             <div className="font-medium">{userData.name}</div>
           </div>
