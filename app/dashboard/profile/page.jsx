@@ -189,7 +189,7 @@ export default function Profile() {
                       </Button>
                     </div>
                   ) : (
-                    <Button className="bg-sky-600 hover:bg-sky-700" onClick={() => setIsEditing(true)}>
+                    <Button className="bg-sky-600 hover:bg-sky-700 cursor-pointer" onClick={() => setIsEditing(true)}>
                       Edit Profile
                     </Button>
                   )}

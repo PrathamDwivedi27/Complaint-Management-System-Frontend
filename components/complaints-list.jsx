@@ -23,6 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { SearchX } from "lucide-react"
 
 export function ComplaintsList() {
   const [location, setLocation] = useState(null)
@@ -142,7 +143,16 @@ export function ComplaintsList() {
 
       {loading ? (
         <p>Loading complaints...</p>
-      ) : (
+      ) : filteredComplaints.length === 0 ? (
+        <div className="flex flex-col items-center justify-center text-center mt-10">
+          <SearchX className="h-20 w-20 text-gray-400 mb-4" />
+          <h3 className="text-xl font-semibold text-gray-700">No complaints found</h3>
+          <p className="text-gray-500 mt-1 max-w-md">
+            Looks like there are no pending complaints matching your selected filters.
+            Try changing the category or location to see more results.
+          </p>
+        </div>
+      ): (
         <div className="grid gap-4">
           {filteredComplaints.map((complaint) => (
             <Card key={complaint._id} className="overflow-hidden">
@@ -175,7 +185,7 @@ export function ComplaintsList() {
                 <div className="flex flex-wrap gap-2">
                   <Dialog>
                     
-                      <Button onClick={()=>router.push(`/admin/complaints/${complaint._id}`)} variant="outline" size="sm" className="flex items-center gap-1">
+                      <Button onClick={()=>router.push(`/admin/complaints/${complaint._id}`)} variant="outline" size="sm" className="flex items-center gap-1 cursor-pointer">
                         <Eye className="h-4 w-4" />
                         View Details
                       </Button>
@@ -214,14 +224,14 @@ export function ComplaintsList() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600"
+                    className="text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 cursor-pointer"
                     onClick={() => handleReject(complaint)}
                   >
                     Reject
                   </Button>
                   <Button
                     size="sm"
-                    className="bg-sky-500 hover:bg-sky-600 text-white"
+                    className="bg-sky-500 hover:bg-sky-600 text-white cursor-pointer "
                     onClick={() => handleAssign(complaint)}
                   >
                     Assign

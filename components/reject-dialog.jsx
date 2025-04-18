@@ -73,7 +73,7 @@ export function RejectDialog({ open, onOpenChange, complaint }) {
           />
         </div>
         <DialogFooter className="sm:justify-between">
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="gap-1">
+          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="gap-1 cursor-pointer">
             <X className="h-4 w-4" />
             Cancel
           </Button>
@@ -84,7 +84,7 @@ export function RejectDialog({ open, onOpenChange, complaint }) {
               handleSubmit()
             }}
             disabled={isSubmitting}
-            className="bg-red-500 hover:bg-red-600 text-white"
+            className="bg-red-500 hover:bg-red-600 text-white cursor-pointer"
           >
             {isSubmitting ? "Submitting..." : "Submit Rejection"}
           </Button>

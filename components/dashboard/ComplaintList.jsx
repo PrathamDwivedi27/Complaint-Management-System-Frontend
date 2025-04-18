@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { SearchX } from "lucide-react";
 
 export default function ComplaintList({ complaints }) {
   const router = useRouter();
@@ -29,9 +30,14 @@ export default function ComplaintList({ complaints }) {
 
   if (!complaints || complaints.length === 0) {
     return (
-      <div className="text-center text-gray-500 mt-10 text-lg">
-        No complaints found matching your filters.
-      </div>
+      <div className="flex flex-col items-center justify-center text-center mt-10">
+          <SearchX className="h-20 w-20 text-gray-400 mb-4" />
+          <h3 className="text-xl font-semibold text-gray-700">No complaints found</h3>
+          <p className="text-gray-500 mt-1 max-w-md">
+            Looks like there are no pending complaints matching your selected filters.
+            Try changing the category or location to see more results.
+          </p>
+        </div>
     );
   }
 

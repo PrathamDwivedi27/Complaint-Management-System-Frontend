@@ -15,12 +15,15 @@ export function DashboardHeader() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:5000/api/v1/user/get-user-by-token", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          "http://localhost:5000/api/v1/user/get-user-by-token",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await res.json();
         if (data.success) {
@@ -64,20 +67,21 @@ export function DashboardHeader() {
 
             {/* Dropdown Menu */}
             {menuOpen && (
-  <div className="absolute top-9 right-0 bg-white border border-gray-200 rounded-lg shadow-lg w-56 p-2">
-    <div className="px-4 py-2 text-sm text-gray-700 border-b">
-      <p className="font-medium">{userData.name}</p>
-      <p className="text-xs text-gray-500 truncate">{userData.email}</p>
-    </div>
-    <button
-      onClick={handleLogout}
-      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-    >
-      Logout
-    </button>
-  </div>
-)}
-
+              <div className="absolute top-9 right-0 bg-white border border-gray-200 rounded-lg shadow-lg w-56 p-2">
+                <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                  <p className="font-medium">{userData.name}</p>
+                  <p className="text-xs text-gray-500 truncate">
+                    {userData.email}
+                  </p>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -143,14 +143,14 @@ export function AssignDialog({ open, onOpenChange, complaint }) {
           </div>
         </div>
         <DialogFooter className="sm:justify-between">
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <Button type="button" className="cursor-pointer" variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
           <Button
             type="button"
             onClick={handleSubmit}
             disabled={!selectedOfficerId || isSubmitting}
-            className="bg-sky-500 hover:bg-sky-600 text-white gap-1"
+            className="bg-sky-500 hover:bg-sky-600 text-white gap-1 cursor-pointer"
           >
             <Check className="h-4 w-4" />
             {isSubmitting ? "Assigning..." : "Assign Officer"}
