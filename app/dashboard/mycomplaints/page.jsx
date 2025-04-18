@@ -12,8 +12,8 @@ const page = () => {
     
   return (
     <div className="min-h-screen bg-gray-50 flex">
-          <Sidebar />
-          <main className="flex-1 p-8">
+          {/* <Sidebar /> */}
+          <main className="flex-1 p-4">
             <div className="max-w-6xl mx-auto">
               <Header />
               <MyComplaintList />

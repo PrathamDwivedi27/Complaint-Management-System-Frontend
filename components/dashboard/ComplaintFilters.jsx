@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "../ui/input";
 
 export default function ComplaintFilters({setStatus, setCategory, setLocation}) {
-
+  
 
   return (
     <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">

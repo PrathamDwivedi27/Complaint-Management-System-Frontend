@@ -16,17 +16,17 @@ export default function Home() {
       <span className="text-xl font-semibold text-gray-900">ComplaintCare</span>
     </div>
     <div className="flex items-center space-x-4">
-      <Link href="/contact">
-        <Button variant="ghost">Contact</Button>
+      <Link href="/contact" className="cursor-pointer">
+        <Button variant="ghost" className="cursor-pointer">Contact</Button>
       </Link>
-      <Link href="/login">
-        <Button variant="ghost">Login</Button>
+      <Link href="/login" className="cursor-pointer">
+        <Button variant="ghost" className="cursor-pointer">Login</Button>
       </Link>
-      <Link href="/registerofficer">
-        <Button className="underline text-violet-800 hover:text-violet-900" variant="ghost">Register as officer</Button>
+      <Link href="/registerofficer" className="cursor-pointer">
+        <Button className="text-gray-400 cursor-pointer" variant="ghost">Register as officer</Button>
       </Link>
-      <Link href="/dashboard">
-        <Button className="bg-sky-600 hover:bg-sky-700 text-white">Get Started</Button>
+      <Link href="/dashboard" className="cursor-pointer">
+        <Button className="bg-sky-600 hover:bg-sky-700 text-white cursor-pointer">Get Started</Button>
       </Link>
     </div>
   </div>

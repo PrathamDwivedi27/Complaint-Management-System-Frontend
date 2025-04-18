@@ -26,7 +26,6 @@ export default function LoginOfficer() {
       if (data.success) {
         localStorage.setItem('token', data.token)
         alert('Login successful!')
-        // Redirect officer as needed — update this route if required
         router.push('/officer')
       } else {
         alert(data.message || 'Login failed')
@@ -38,53 +37,74 @@ export default function LoginOfficer() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-900 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
-      >
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Officer Login</h2>
-
-        <div className="mb-4">
-          <label className="block mb-1 font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            required
-          />
-        </div>
-
-        <div className="mb-6">
-          <label className="block mb-1 font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
+    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-sky-100 to-sky-300">
+      {/* Left: Form */}
+      <div className="flex flex-1 items-center justify-center p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md"
         >
-          Login
-        </button>
+          <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">
+            Officer Login
+          </h2>
 
-        <div className="mt-6 text-center">
-          <span className="text-gray-600">Don&apos;t have an account?</span>
+          <div className="mb-4">
+            <label className="block mb-1 font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              required
+            />
+          </div>
+
+          <div className="mb-6">
+            <label className="block mb-1 font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              required
+            />
+          </div>
+
           <button
-            type="button"
-            onClick={() => router.push('/registerofficer')}
-            className="ml-2 text-purple-700 hover:underline font-medium"
+            type="submit"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
           >
-            Register
+            Login
           </button>
+
+          <div className="mt-6 text-center">
+            <span className="text-gray-600">Don&apos;t have an account?</span>
+            <button
+              type="button"
+              onClick={() => router.push('/registerofficer')}
+              className="ml-2 text-sky-600 hover:underline font-medium"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Right: Image and Text */}
+      <div className="hidden md:flex flex-1 bg-sky-200 items-center justify-center p-10 relative">
+        <div className="max-w-lg text-center">
+          <img
+            src="https://rocketflow.in/resources/blog/images/complaint-management-banner.jpeg"
+            alt="Officer and Complaint Management"
+            className="rounded-xl shadow-lg mb-6 w-full"
+          />
+          <h3 className="text-2xl font-bold text-sky-800 mb-2">Welcome Officer</h3>
+          <p className="text-sky-900">
+            Track, resolve and manage citizen complaints with ease. Your role is
+            crucial in maintaining trust and order. Log in to continue your duties.
+          </p>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

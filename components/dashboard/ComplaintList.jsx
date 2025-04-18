@@ -4,36 +4,36 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
-// const complaints = [
-//   {
-//     id: 1,
-//     title: "Street light not working",
-//     description: "The street light near my house has been out for a week.",
-//     status: "Pending",
-//     date: "2023-10-01",
-//   },
-//   {
-//     id: 2,
-//     title: "Water leakage",
-//     description: "There is a water leakage in front of my building.",
-//     status: "In Progress",
-//     date: "2023-09-28",
-//   },
-//   {
-//     id: 3,
-//     title: "Garbage not collected",
-//     description: "Garbage hasn't been collected for 3 days in our lane.",
-//     status: "Completed",
-//     date: "2023-09-25",
-//   },
-// ];
-
-export default function ComplaintList({complaints}) {
-
+export default function ComplaintList({ complaints }) {
   const router = useRouter();
-  console.log("complaints in complaint list component", complaints);
-    
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading for smoother UX (can remove if you're handling server-side)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 900); // fake 1 second loading
+    return () => clearTimeout(timer);
+  }, [complaints]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <Loader2 className="animate-spin h-10 w-10 text-gray-600" />
+        <span className="ml-3 text-gray-600 text-sm">Loading complaints...</span>
+      </div>
+    );
+  }
+
+  if (!complaints || complaints.length === 0) {
+    return (
+      <div className="text-center text-gray-500 mt-10 text-lg">
+        No complaints found matching your filters.
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 gap-6">
@@ -60,7 +60,9 @@ export default function ComplaintList({complaints}) {
                   variant="outline"
                   size="sm"
                   className="flex items-center gap-1 cursor-pointer"
-                  onClick={() => router.push(`/dashboard/complaints/${complaint._id}`)}
+                  onClick={() =>
+                    router.push(`/dashboard/complaints/${complaint._id}`)
+                  }
                 >
                   <Eye className="h-4 w-4" />
                   View Details
@@ -72,8 +74,8 @@ export default function ComplaintList({complaints}) {
                 complaint?.status === "pending"
                   ? "bg-yellow-100 text-yellow-800"
                   : complaint?.status === "in-progress"
-                  ? "bg-blue-100 text-blue-800" : 
-                    complaint?.status === "completed"
+                  ? "bg-blue-100 text-blue-800"
+                  : complaint?.status === "completed"
                   ? "bg-green-100 text-green-800"
                   : complaint?.status === "rejected"
                   ? "bg-red-100 text-red-800"

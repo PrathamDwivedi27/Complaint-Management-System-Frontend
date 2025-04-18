@@ -93,35 +93,9 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r">
-        <div className="p-6">
-          <div className="flex items-center space-x-2">
-            <FileText className="h-6 w-6 text-sky-600" />
-            <span className="text-xl font-semibold">ComplaintCare</span>
-          </div>
-        </div>
-        <nav className="mt-6">
-          <Link href="/dashboard" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-            <Home className="h-5 w-5 mr-3" />
-            Home
-          </Link>
-          <Link href="/dashboard/profile" className="flex items-center px-6 py-3 text-sky-600 bg-sky-50">
-            <User className="h-5 w-5 mr-3" />
-            Profile
-          </Link>
-          <Link href="/dashboard" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-            <MessageSquare className="h-5 w-5 mr-3" />
-            My Complaints
-          </Link>
-          <Link href="/contact" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-            <Phone className="h-5 w-5 mr-3" />
-            Contact Us
-          </Link>
-        </nav>
-      </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl font-bold text-gray-900 mb-8">My Profile</h1>
 

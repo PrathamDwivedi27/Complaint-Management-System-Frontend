@@ -36,14 +36,14 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-row">
+    <div className="min-h-screen flex flex-row">
       {/* Sidebar always on side */}
-      <div className="w-64 border-r border-gray-200 bg-white">
+      {/* <div className="w-64 border-r border-gray-200 bg-white">
         <Sidebar />
-      </div>
+      </div> */}
 
       {/* Main content */}
-      <main className="flex-1 p-4 md:p-8">
+      <main className="flex-1 p-2 md:p-2">
         <div className="max-w-5xl mx-auto w-full">
           <Header />
           {complaint ? (

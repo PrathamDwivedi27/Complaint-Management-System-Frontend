@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const router = useRouter()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const res = await fetch('http://localhost:5000/api/v1/user/login', {
@@ -18,74 +18,93 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
-      })
+      });
 
-      const data = await res.json()
-      console.log('Response:', data)
-
+      const data = await res.json();
       if (data.success) {
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('token', data.token);
 
-        const role = data.data.role
+        const role = data.data.role;
         if (role === 'admin') {
-          router.push('/admin')
+          router.push('/admin');
         } else if (role === 'citizen') {
-          router.push('/dashboard')
+          router.push('/dashboard');
         } else {
-          console.warn('Unknown role:', role)
+          console.warn('Unknown role:', role);
         }
       } else {
-        console.error('Login failed:', data)
+        alert('Login failed: ' + data.message);
       }
     } catch (error) {
-      console.error('Error logging in:', error)
+      console.error('Error logging in:', error);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-900 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md"
-      >
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Login</h2>
-
-        <label className="block mb-2 font-semibold text-gray-700">Email</label>
-        <input
-          type="email"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <label className="block mb-2 font-semibold text-gray-700">Password</label>
-        <input
-          type="password"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-purple-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
+    <div className="min-h-screen flex">
+      {/* Left: Form Section */}
+      <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8 py-16">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white w-full max-w-md p-10 rounded-2xl shadow-xl"
         >
-          Login
-        </button>
+          <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">Complaint Portal Login</h2>
 
-        <div className="mt-6 text-center">
-          <span className="text-gray-600">Don't have an account?</span>
+          <label className="block mb-2 font-semibold text-gray-700">Email</label>
+          <input
+            type="email"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label className="block mb-2 font-semibold text-gray-700">Password</label>
+          <input
+            type="password"
+            className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
           <button
-            type="button"
-            onClick={() => router.push('/register')}
-            className="ml-2 text-purple-700 hover:underline font-medium"
+            type="submit"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
           >
-            Register
+            Login
           </button>
+
+          <div className="mt-6 text-center">
+            <span className="text-gray-600">Don't have an account?</span>
+            <button
+              type="button"
+              onClick={() => router.push('/register')}
+              className="ml-2 text-sky-600 hover:underline font-medium"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Right: Image and Message */}
+      <div className="hidden md:flex w-1/2 bg-gradient-to-br from-sky-500 to-blue-700 text-white items-center justify-center p-10 relative">
+        <div className="text-center z-10">
+          <h2 className="text-4xl font-bold mb-4">Welcome to Complaint Management</h2>
+          <p className="text-lg max-w-md mx-auto mb-6">
+            Report issues quickly and easily. We're here to ensure your voice is heard.
+          </p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2847/2847697.png"
+            alt="Complaint illustration"
+            className="w-72 h-auto mx-auto drop-shadow-xl"
+          />
         </div>
-      </form>
+
+        {/* Decorative Overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10 z-0" />
+      </div>
     </div>
-  )
+  );
 }

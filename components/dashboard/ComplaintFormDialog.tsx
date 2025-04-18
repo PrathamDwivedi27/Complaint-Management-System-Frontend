@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function ComplaintFormDialog() {
   const [open, setOpen] = useState(false);
@@ -58,6 +59,7 @@ export default function ComplaintFormDialog() {
       });
 
       console.log("Submitting complaint...");
+      toast.info("Submitting your complaint...");
 
       const response = await fetch("http://localhost:5000/api/v1/complaint", {
         method: "POST",
@@ -74,8 +76,7 @@ export default function ComplaintFormDialog() {
         throw new Error(data.error);
       }
       console.log("Complaint submitted successfully:", data);
-      alert("Complaint submitted successfully!");
-      // Optionally, you can reset the form fields here
+      toast.success("Complaint submitted successfully!");      // Optionally, you can reset the form fields here
     } catch (error) {
     } finally {
       setTitle("");
