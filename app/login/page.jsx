@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,13 +28,17 @@ export default function LoginPage() {
         const role = data.data.role;
         if (role === 'admin') {
           router.push('/admin');
+          toast.success('Welcome Admin');
         } else if (role === 'citizen') {
           router.push('/dashboard');
+          toast.success('Welcome User');
         } else {
-          console.warn('Unknown role:', role);
+          // console.warn('Unknown role:', role);
+          toast.warn('Unknown role: ' + role);
         }
       } else {
-        alert('Login failed: ' + data.message);
+        // alert('Login failed: ' + data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -70,7 +75,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 cursor-pointer"
           >
             Login
           </button>

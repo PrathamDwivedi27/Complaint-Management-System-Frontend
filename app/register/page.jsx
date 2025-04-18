@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -44,12 +45,15 @@ export default function RegisterPage() {
         localStorage.setItem('token', data.token);
         const role = data.data?.role;
         router.push(role === 'admin' ? '/admin' : '/dashboard');
+        toast.success('Registration successful! Welcome ' + role);
       } else {
-        alert(data.message || 'Registration failed');
+        // alert(data.message || 'Registration failed');
+        toast.error(data.message || 'Registration failed');
       }
     } catch (error) {
       console.error('Registration error:', error);
-      alert('Something went wrong during registration.');
+      // alert('Something went wrong during registration.');
+      toast.error('Something went wrong during registration.');
     }
   };
 
@@ -141,7 +145,7 @@ export default function RegisterPage() {
 
   <button
     type="submit"
-    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-6"
+    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-6 cursor-pointer"
   >
     Register
   </button>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export default function LoginOfficer() {
   const [email, setEmail] = useState('')
@@ -25,14 +26,17 @@ export default function LoginOfficer() {
 
       if (data.success) {
         localStorage.setItem('token', data.token)
-        alert('Login successful!')
+        // alert('Login successful!')
+        toast.success('Login successful!')
         router.push('/officer')
       } else {
-        alert(data.message || 'Login failed')
+        // alert(data.message || 'Login failed')
+        toast.error(data.message || 'Login failed')
       }
     } catch (error) {
       console.error('Error logging in:', error)
-      alert('Something went wrong')
+      // alert('Something went wrong')
+      toast.error('Something went wrong')
     }
   }
 
@@ -72,7 +76,7 @@ export default function LoginOfficer() {
 
           <button
             type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 cursor-pointer"
           >
             Login
           </button>

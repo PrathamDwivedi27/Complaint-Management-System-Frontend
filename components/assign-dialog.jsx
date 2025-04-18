@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { toast } from "sonner"
 
 export function AssignDialog({ open, onOpenChange, complaint }) {
   const [officers, setOfficers] = useState([])
@@ -72,9 +73,11 @@ export function AssignDialog({ open, onOpenChange, complaint }) {
       }
 
       console.log("Successfully assigned complaint:", complaint, "to officer:", selectedOfficerId);
-      alert("Complaint assigned successfully");
+      // alert("Complaint assigned successfully");
+      toast.success("Complaint assigned successfully");
     } catch (err) {
       console.error("Error assigning complaint:", err)
+      toast.error("Failed to assign complaint. Please try again.");
     } finally {
       setIsSubmitting(false)
       setSelectedOfficerId("")

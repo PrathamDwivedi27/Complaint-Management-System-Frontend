@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 const categories = [
   { label: "Municipal Officer", color: "blue" },
@@ -47,14 +48,17 @@ export default function RegisterOfficer() {
 
       if (data.success) {
         localStorage.setItem('token', data.token)
-        alert('Officer registered successfully!')
+        // alert('Officer registered successfully!')
+        toast.success('Officer registered successfully!')
         router.push('/officer')
       } else {
-        alert(data.message || 'Registration failed')
+        // alert(data.message || 'Registration failed')
+        toast.error(data.message || 'Registration failed')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('Something went wrong!')
+      // alert('Something went wrong!')
+      toast.error('Something went wrong!')
     }
   }
 
@@ -117,7 +121,7 @@ export default function RegisterOfficer() {
 
           <button
             type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-8"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-8 cursor-pointer"
           >
             Register
           </button>

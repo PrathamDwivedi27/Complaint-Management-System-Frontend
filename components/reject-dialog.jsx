@@ -13,6 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 export function RejectDialog({ open, onOpenChange, complaint }) {
   const [reason, setReason] = useState("")
@@ -43,8 +44,10 @@ export function RejectDialog({ open, onOpenChange, complaint }) {
       }
   
       console.log("Rejected complaint:", complaint, "Reason:", reason)
+      toast.success("Complaint rejected successfully")
     } catch (err) {
       console.error("Error rejecting complaint:", err)
+      toast.error("Failed to reject complaint")
     } finally {
       setIsSubmitting(false)
       setReason("")
