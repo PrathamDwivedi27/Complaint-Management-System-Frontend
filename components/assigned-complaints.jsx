@@ -96,7 +96,7 @@ export function AssignedComplaints() {
             <span>Assigned</span>
           </Badge>
         )
-      case "in_progress":
+      case "in-progress":
         return (
           <Badge variant="outline" className="flex items-center gap-1 text-blue-600 bg-blue-50 border-blue-200">
             <PlayCircle className="h-3 w-3" />
@@ -144,8 +144,8 @@ export function AssignedComplaints() {
           <SearchX className="h-20 w-20 text-gray-400 mb-4" />
           <h3 className="text-xl font-semibold text-gray-700">No complaints found</h3>
           <p className="text-gray-500 mt-1 max-w-md">
-            Looks like there are no pending complaints matching your selected filters.
-            Try changing the category or location to see more results.
+            Looks like there are no assigned complaints matching your selected filters.
+            Try changing the location to see more results.
           </p>
         </div>
       ) : (

@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+
 
 interface AddRemarksDialogProps {
   open: boolean;
@@ -63,11 +65,13 @@ export function AddRemarksDialog({
       }
       const data = await response.json();
       console.log("Status updated successfully:", data);
+      toast.success("Status updated successfully");
 
       setRemarks("");
       onOpenChange(false);
     } catch (error) {
       console.error("Error updating status:", error);
+      toast.error("Error updating status");
       // Optional: toast/error handling here
     } finally {
       setIsSubmitting(false);

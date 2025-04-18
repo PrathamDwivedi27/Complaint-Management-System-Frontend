@@ -15,6 +15,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import {toast} from "sonner"
 
 
 
@@ -54,11 +55,13 @@ export function StatusChangeDialog({ open, onOpenChange, complaint, onStatusChan
       }
       const data = await response.json()
       console.log("Status updated successfully:", data)
+      toast.success("Status updated successfully")
       onStatusChange(complaint._id, newStatus, remarks)
       setRemarks("")
       onOpenChange(false)
     } catch (error) {
       console.error("Error updating status:", error)
+      toast.error("Failed to update status")
       // Optional: toast/error handling here
     } finally {
       setIsSubmitting(false)
@@ -91,7 +94,7 @@ export function StatusChangeDialog({ open, onOpenChange, complaint, onStatusChan
             <RadioGroup value={newStatus} onValueChange={setNewStatus} className="flex flex-col space-y-1">
               {complaint?.status !== "in_progress" && (
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="in_progress" id="in_progress" />
+                  <RadioGroupItem value="in-progress" id="in-progress" />
                   <Label htmlFor="in_progress" className="flex items-center gap-2 cursor-pointer">
                     <PlayCircle className="h-4 w-4 text-blue-500" />
                     <span>In Progress</span>
