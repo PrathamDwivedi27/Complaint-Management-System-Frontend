@@ -4,16 +4,17 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const categories = [
-  'Sanitation Officer',
-  'Water Department Officer',
-  'Electricity Department Officer',
-  'Traffic Police',
-  'Police Officer',
-  'HR Officer',
-  'Legal Officer',
-  'Anti-Corruption Officer',
-  'Consumer Rights Officer',
-  'Telecom Officer',
+  { label: "Municipal Officer", color: "blue" },
+  { label: "Sanitation Officer", color: "green" },
+  { label: "Water Department Officer", color: "teal" },
+  { label: "Electricity Department Officer", color: "yellow" },
+  { label: "Traffic Police", color: "red" },
+  { label: "Police Officer", color: "purple" },
+  { label: "HR Officer", color: "orange" },
+  { label: "Legal Officer", color: "indigo" },
+  { label: "Anti-Corruption Officer", color: "pink" },
+  { label: "Consumer Rights Officer", color: "cyan" },
+  { label: "Telecom Officer", color: "amber" },
 ]
 
 export default function RegisterOfficer() {
@@ -58,71 +59,97 @@ export default function RegisterOfficer() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 to-indigo-900 px-4 py-10">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white w-full max-w-xl p-8 md:p-10 rounded-3xl shadow-2xl"
-      >
-        <h2 className="text-4xl font-bold text-center text-purple-800 mb-8">Register Officer</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            { label: 'Name', name: 'name', type: 'text' },
-            { label: 'Email', name: 'email', type: 'email' },
-            { label: 'Password', name: 'password', type: 'password' },
-            { label: 'Badge ID', name: 'badgeId', type: 'text' },
-            { label: 'Phone', name: 'phone', type: 'text' },
-          ].map((field) => (
-            <div key={field.name}>
-              <label className="block mb-1 font-semibold text-gray-700">{field.label}</label>
-              <input
-                type={field.type}
-                name={field.name}
-                value={form[field.name]}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-                required
-              />
-            </div>
-          ))}
-
-          <div className="md:col-span-2">
-            <label className="block mb-1 font-semibold text-gray-700">Category</label>
-            <select
-              name="category"
-              value={form.category}
-              onChange={handleChange}
-              required
-              className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-            >
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full mt-8 bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-4 rounded-xl transition duration-300"
+    <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-sky-100 to-sky-300">
+      {/* Left: Form */}
+      <div className="flex flex-1 items-center justify-center p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-2xl"
         >
-          Register
-        </button>
+          <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">
+            Register Officer
+          </h2>
 
-        <div className="mt-6 text-center">
-          <span className="text-gray-600">Already have an account?</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[ 
+              { label: 'Name', name: 'name', type: 'text' },
+              { label: 'Email', name: 'email', type: 'email' },
+              { label: 'Password', name: 'password', type: 'password' },
+              { label: 'Badge ID', name: 'badgeId', type: 'text' },
+              { label: 'Phone', name: 'phone', type: 'text' },
+            ].map((field) => (
+              <div key={field.name} className="flex flex-col">
+                <label className="block mb-1 font-medium text-gray-700">{field.label}</label>
+                <input
+                  type={field.type}
+                  name={field.name}
+                  value={form[field.name]}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                  required
+                />
+              </div>
+            ))}
+
+            <div className="md:col-span-2">
+              <label className="block mb-1 font-medium text-gray-700">Category</label>
+              <select
+                name="category"
+                value={form.category}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+              >
+                <option value="">Select Category</option>
+                {categories.map((cat) => (
+                  <option
+                    key={cat.label}
+                    value={cat.label}
+                    className={`text-${cat.color}-600`}
+                    style={{ backgroundColor: `${cat.color}-50` }}
+                  >
+                    {cat.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <button
-            type="button"
-            onClick={() => router.push('/loginofficer')}
-            className="ml-2 text-purple-700 hover:underline font-semibold"
+            type="submit"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-8"
           >
-            Login
+            Register
           </button>
+
+          <div className="mt-6 text-center">
+            <span className="text-gray-600">Already have an account?</span>
+            <button
+              type="button"
+              onClick={() => router.push('/loginofficer')}
+              className="ml-2 text-sky-600 hover:underline font-medium cursor-pointer"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Right: Image and Text */}
+      <div className="hidden md:flex flex-1 bg-sky-200 items-center justify-center p-10 relative">
+        <div className="max-w-lg text-center">
+          <img
+            src="https://rocketflow.in/resources/blog/images/complaint-management-banner.jpeg"
+            alt="Officer and Complaint Management"
+            className="rounded-xl shadow-lg mb-6 w-full"
+          />
+          <h3 className="text-2xl font-bold text-sky-800 mb-2">Welcome Officer</h3>
+          <p className="text-sky-900">
+            Track, resolve, and manage citizen complaints with ease. Your role is
+            crucial in maintaining trust and order. Register to continue your duties.
+          </p>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

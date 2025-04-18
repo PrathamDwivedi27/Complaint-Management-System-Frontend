@@ -82,7 +82,7 @@ export default function LoginOfficer() {
             <button
               type="button"
               onClick={() => router.push('/registerofficer')}
-              className="ml-2 text-sky-600 hover:underline font-medium"
+              className="ml-2 text-sky-600 hover:underline font-medium cursor-pointer"
             >
               Register
             </button>
