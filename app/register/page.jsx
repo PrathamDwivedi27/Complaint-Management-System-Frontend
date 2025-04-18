@@ -1,35 +1,33 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    role: 'citizen',
     phone: '',
+    role: 'citizen',
     adminSecret: '',
-  })
+  });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
     try {
-      const payload = { ...formData }
-      if (formData.role !== 'admin') delete payload.adminSecret
+      const payload = { ...formData };
+      if (payload.role !== 'admin') delete payload.adminSecret;
 
       const res = await fetch('http://localhost:5000/api/v1/user/register', {
         method: 'POST',
@@ -37,116 +35,133 @@ export default function RegisterPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      })
+      });
 
-      const data = await res.json()
-      console.log('Register response:', data)
+      const data = await res.json();
+      console.log('Register response:', data);
 
       if (data.success) {
-        localStorage.setItem('token', data.token)
-        const role = data.data?.role
-        router.push(role === 'admin' ? '/admin' : '/dashboard')
+        localStorage.setItem('token', data.token);
+        const role = data.data?.role;
+        router.push(role === 'admin' ? '/admin' : '/dashboard');
       } else {
-        console.error('Registration failed:', data)
-        alert(data.message || 'Registration failed')
+        alert(data.message || 'Registration failed');
       }
     } catch (error) {
-      console.error('Error registering user:', error)
-      alert('Something went wrong')
+      console.error('Registration error:', error);
+      alert('Something went wrong during registration.');
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
-      <div className="bg-white rounded-2xl shadow-lg flex flex-col md:flex-row overflow-hidden w-full max-w-5xl">
-        
-        {/* Image Section */}
-        <div className="hidden md:block md:w-1/2">
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/2847/2847697.png" // Replace with relevant image
-            alt="Register Illustration"
-            width={800}
-            height={600}
-            className="h-full w-full object-cover"
+    <div className="min-h-screen flex">
+      {/* Left: Form Section */}
+      <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8 py-16">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white w-full max-w-md p-10 rounded-2xl shadow-xl"
+        >
+          <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">Complaint Portal Register</h2>
+
+          <label className="block mb-2 font-semibold text-gray-700">Name</label>
+          <input
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            required
+          />
+
+          <label className="block mb-2 font-semibold text-gray-700">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            required
+          />
+
+          <label className="block mb-2 font-semibold text-gray-700">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            required
+          />
+
+          <label className="block mb-2 font-semibold text-gray-700">Phone</label>
+          <input
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+            required
+          />
+
+          <label className="block mb-2 font-semibold text-gray-700">Role</label>
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+          >
+            <option value="citizen">Citizen</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          {formData.role === 'admin' && (
+            <>
+              <label className="block mb-2 font-semibold text-gray-700">Admin Secret</label>
+              <input
+                name="adminSecret"
+                value={formData.adminSecret}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                required
+              />
+            </>
+          )}
+
+          <button
+            type="submit"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
+          >
+            Register
+          </button>
+
+          <div className="mt-6 text-center">
+            <span className="text-gray-600">Already have an account?</span>
+            <button
+              type="button"
+              onClick={() => router.push('/login')}
+              className="ml-2 text-sky-600 hover:underline font-medium cursor-pointer"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Right: Image and Message */}
+      <div className="hidden md:flex w-1/2 bg-gradient-to-br from-sky-500 to-blue-700 text-white items-center justify-center p-10 relative">
+        <div className="text-center z-10">
+          <h2 className="text-4xl font-bold mb-4">Join the Complaint Management Portal</h2>
+          <p className="text-lg max-w-md mx-auto mb-6">
+            Be a responsible citizen. Raise your voice and report issues effortlessly.
+          </p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2847/2847697.png"
+            alt="Complaint illustration"
+            className="w-72 h-auto mx-auto drop-shadow-xl"
           />
         </div>
 
-        {/* Form Section */}
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Register</h2>
-
-          <form onSubmit={handleSubmit}>
-            <label className="block mb-2 font-semibold">Name</label>
-            <input
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-              required
-            />
-
-            <label className="block mb-2 font-semibold">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-              required
-            />
-
-            <label className="block mb-2 font-semibold">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-              required
-            />
-
-            <label className="block mb-2 font-semibold">Phone</label>
-            <input
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-              required
-            />
-
-            <label className="block mb-2 font-semibold">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-            >
-              <option value="citizen">Citizen</option>
-              <option value="admin">Admin</option>
-            </select>
-
-            {formData.role === 'admin' && (
-              <>
-                <label className="block mb-2 font-semibold">Admin Secret</label>
-                <input
-                  name="adminSecret"
-                  value={formData.adminSecret}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mb-4"
-                  required
-                />
-              </>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-sky-600 text-white py-2 px-4 rounded hover:bg-sky-700 transition"
-            >
-              Register
-            </button>
-          </form>
-        </div>
+        {/* Decorative Overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-10 z-0" />
       </div>
     </div>
-  )
+  );
 }
