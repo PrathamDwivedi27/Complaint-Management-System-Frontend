@@ -1,7 +1,17 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FileText, Home, MessageSquare, Phone, User } from "lucide-react";
 
 export default function Sidebar() {
+  const pathname = usePathname(); // gets current route
+
+  const links = [
+    { href: "/dashboard", label: "Home", icon: Home },
+    { href: "/dashboard/profile", label: "Profile", icon: User },
+    { href: "/dashboard/mycomplaints", label: "My Complaints", icon: MessageSquare },
+    { href: "/contact", label: "Contact Us", icon: Phone },
+  ];
+
   return (
     <aside className="w-64 bg-white">
       <div className="p-6">
@@ -11,22 +21,23 @@ export default function Sidebar() {
         </div>
       </div>
       <nav className="mt-6">
-        <Link href="/dashboard" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-          <Home className="h-5 w-5 mr-3" />
-          Home
-        </Link>
-        <Link href="/dashboard/profile" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-          <User className="h-5 w-5 mr-3" />
-          Profile
-        </Link>
-        <Link href="/dashboard/mycomplaints" className="flex items-center px-6 py-3 text-sky-600 bg-sky-50">
-          <MessageSquare className="h-5 w-5 mr-3" />
-          My Complaints
-        </Link>
-        <Link href="/contact" className="flex items-center px-6 py-3 text-gray-600 hover:bg-sky-50 hover:text-sky-600">
-          <Phone className="h-5 w-5 mr-3" />
-          Contact Us
-        </Link>
+        {links.map(({ href, label, icon: Icon }) => {
+          const isActive = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex items-center px-6 py-3 ${
+                isActive
+                  ? "text-sky-600 bg-sky-50"
+                  : "text-gray-600 hover:bg-sky-50 hover:text-sky-600"
+              }`}
+            >
+              <Icon className="h-5 w-5 mr-3" />
+              {label}
+            </Link>
+          );
+        })}
       </nav>
     </aside>
   );

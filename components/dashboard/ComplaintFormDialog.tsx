@@ -96,7 +96,7 @@ export default function ComplaintFormDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="mb-4 bg-sky-600 text-white hover:bg-blue-700">
+        <Button className="mb-4 bg-sky-600 text-white hover:bg-blue-700 cursor-pointer">
           <PlusCircle className="h-4 w-4 mr-2" />
           New Complaint
         </Button>
@@ -150,92 +150,92 @@ export default function ComplaintFormDialog() {
 
           {/* Category */}
           <div className="flex flex-col space-y-2">
-            <Label>Category *</Label>
+            <Label className="">Category *</Label>
             <Select value={category} onValueChange={setCategory} required>
-              <SelectTrigger>
+              <SelectTrigger className="cursor-pointer">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="">
                 <SelectItem
                   value="Road Damage"
-                  className="border-l-4 border-red-500 pl-3"
+                  className="border-l-4 border-red-500 pl-3 cursor-pointer"
                 >
                   <span className="text-red-600">Road Damage</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Water Leakage"
-                  className="border-l-4 border-blue-500 pl-3"
+                  className="border-l-4 border-blue-500 pl-3 cursor-pointer"
                 >
                   <span className="text-blue-600">Water Leakage</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Garbage Collection"
-                  className="border-l-4 border-green-500 pl-3"
+                  className="border-l-4 border-green-500 pl-3 cursor-pointer"
                 >
                   <span className="text-green-600">Garbage Collection</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Street Lights"
-                  className="border-l-4 border-yellow-500 pl-3"
+                  className="border-l-4 border-yellow-500 pl-3 cursor-pointer"
                 >
                   <span className="text-yellow-600">Street Lights</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Traffic Signals"
-                  className="border-l-4 border-orange-500 pl-3"
+                  className="border-l-4 border-orange-500 pl-3 cursor-pointer"
                 >
                   <span className="text-orange-600">Traffic Signals</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Illegal Construction"
-                  className="border-l-4 border-purple-500 pl-3"
+                  className="border-l-4 border-purple-500 pl-3 cursor-pointer"
                 >
                   <span className="text-purple-600">Illegal Construction</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Sewage Issues"
-                  className="border-l-4 border-teal-500 pl-3"
+                  className="border-l-4 border-teal-500 pl-3 cursor-pointer"
                 >
                   <span className="text-teal-600">Sewage Issues</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Noise Pollution"
-                  className="border-l-4 border-pink-500 pl-3"
+                  className="border-l-4 border-pink-500 pl-3 cursor-pointer"
                 >
                   <span className="text-pink-600">Noise Pollution</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Harassment"
-                  className="border-l-4 border-rose-500 pl-3"
+                  className="border-l-4 border-rose-500 pl-3 cursor-pointer"
                 >
                   <span className="text-rose-600">Harassment</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Discrimination"
-                  className="border-l-4 border-indigo-500 pl-3"
+                  className="border-l-4 border-indigo-500 pl-3 cursor-pointer"
                 >
                   <span className="text-indigo-600">Discrimination</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Fraud"
-                  className="border-l-4 border-amber-500 pl-3"
+                  className="border-l-4 border-amber-500 pl-3 cursor-pointer"
                 >
                   <span className="text-amber-600">Fraud</span>
                 </SelectItem>
 
                 <SelectItem
                   value="Internet & Telecom Issues"
-                  className="border-l-4 border-cyan-500 pl-3"
+                  className="border-l-4 border-cyan-500 pl-3 cursor-pointer"
                 >
                   <span className="text-cyan-600">
                     Internet & Telecom Issues
@@ -260,7 +260,7 @@ export default function ComplaintFormDialog() {
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full bg-sky-600 text-white hover:bg-blue-700"
+            className="w-full bg-sky-600 text-white hover:bg-blue-700 cursor-pointer"
             onClick={handleSubmit}
             disabled={loading}
           >

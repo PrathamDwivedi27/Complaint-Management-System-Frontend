@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Header from "@/components/dashboard/Header";
 import { useParams } from "next/navigation";
@@ -84,11 +84,21 @@ export default function Dashboard() {
                   </div>
                   <div className="flex gap-3 items-center">
                     <h2 className="font-medium text-gray-700">Status:</h2>
-                    <span className={`inline-block px-3 py-2 rounded-md text-sm font-medium ${
-                      complaint.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                      complaint.status === 'approved' ? 'bg-green-100 text-green-700' :
-                      'bg-red-100 text-red-700'
-                    }`}>
+                    <span
+                      className={`inline-block px-3 py-2 rounded-md text-sm font-medium ${
+                        complaint?.status === "pending"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : complaint?.status === "in-progress"
+                          ? "bg-blue-100 text-blue-800"
+                          : complaint?.status === "completed"
+                          ? "bg-green-100 text-green-800"
+                          : complaint?.status === "rejected"
+                          ? "bg-red-100 text-red-800"
+                          : complaint?.status === "approved"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-green-100 text-green-800"
+                      }`}
+                    >
                       {complaint.status}
                     </span>
                   </div>
@@ -96,15 +106,26 @@ export default function Dashboard() {
 
                 {complaint.rejectionReason && (
                   <div>
-                    <h2 className="font-medium text-red-700">Rejection Reason</h2>
+                    <h2 className="font-medium text-red-700">
+                      Rejection Reason
+                    </h2>
                     <p className="text-gray-600">{complaint.rejectionReason}</p>
                   </div>
                 )}
 
-                {complaint.remarks && (
-                  <div>
-                    <h2 className="font-medium text-gray-700">Remarks</h2>
-                    <p className="text-gray-600">{complaint.remarks}</p>
+                {complaint.remarks.length > 0 && (
+                  <div className="mb-4  p-3 rounded-md">
+                    <h4 className="text-sm font-medium mb-2">Remarks:</h4>
+                    <ul className="list-disc pl-6 text-gray-900 space-y-1 ">
+                      {complaint.remarks.map((remark, index) => (
+                        <li
+                          key={index}
+                          className="text-gray-700 py-1 rounded-md pl-2"
+                        >
+                          {remark}{" "}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
