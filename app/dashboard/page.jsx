@@ -47,7 +47,7 @@ export default function DashboardPage() {
       <ComplaintFilters setCategory={setCategory} setStatus={setStatus} setLocation={setLocation} />
       <ComplaintFormDialog />
       <ComplaintList complaints={complaints} />
-      <Toaster richColors position="top-right" />
+      {/* <Toaster richColors position="top-right" /> */}
     </>
   );
 }

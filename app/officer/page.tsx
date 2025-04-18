@@ -8,7 +8,7 @@ export default function OfficerDashboardPage() {
       <OfficerHeader />
       <div className="flex-1 p-6 overflow-auto">
         <AssignedComplaints />
-        <Toaster richColors position="top-right" />
+        {/* <Toaster richColors position="top-right" /> */}
         
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Toaster richColors position="top-center" /> {/* ✅ Add the Toaster globally */}
+        <Toaster richColors position="top-right" duration={1000}  /> {/* ✅ Add the Toaster globally */}
         {children}
       </body>
     </html>

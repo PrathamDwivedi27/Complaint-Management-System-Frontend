@@ -24,6 +24,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { SearchX } from "lucide-react"
+import { toast } from "sonner"
 
 export function ComplaintsList() {
   const [location, setLocation] = useState(null)
@@ -75,6 +76,7 @@ export function ComplaintsList() {
     const data = await res.json()
     console.log("Fetched complaints:", data)
     setComplaints(data.data)
+    toast.success("Complaints fetched successfully")
     setFilteredComplaints(data.data)
   }
   catch (error) {

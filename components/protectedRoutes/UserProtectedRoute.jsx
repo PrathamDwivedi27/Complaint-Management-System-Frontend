@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-const AdminProtectedRoute = ({ children }) => {
+
+const UserProtectedRoute = ({ children }) => {
 
   const [isAuthorized, setIsAuthorized] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const verifyAdmin = async () => {
+    const verifyUser = async () => {
       const token = localStorage.getItem('token');
 
       if (!token) {
@@ -36,23 +37,24 @@ const AdminProtectedRoute = ({ children }) => {
         const data = await response.json();
         console.log("data", data);
 
-        if (data?.user?.role === 'admin') {
-          // toast.success('Authorized');
+        if (data?.user?.role === 'citizen') {
           setIsAuthorized(true);
+        //   toast.success('Authorized');
         } else {
-          // alert('Not authorized');
-          toast.error('Not authorized');
+        //   alert('Not authorized');
+            toast.error('Not authorized');
           router.push('/');
         }
       } catch (error) {
         console.error('Error verifying admin:', error);
         // alert('Not authorized');
         toast.error('Not authorized');
+         // router.push('/');
         router.push('/');
       }
     };
 
-    verifyAdmin();
+    verifyUser();
   }, [router]);
 
   if (isAuthorized === null) {
@@ -62,4 +64,4 @@ const AdminProtectedRoute = ({ children }) => {
   return <>{children}</>;
 };
 
-export default AdminProtectedRoute;
+export default UserProtectedRoute;

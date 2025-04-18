@@ -2,14 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-
-const AdminProtectedRoute = ({ children }) => {
+const OfficerProtectedRoute = ({ children }) => {
 
   const [isAuthorized, setIsAuthorized] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const verifyAdmin = async () => {
+    const verifyOfficer = async () => {
       const token = localStorage.getItem('token');
 
       if (!token) {
@@ -20,7 +19,7 @@ const AdminProtectedRoute = ({ children }) => {
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/v1/user/get-user-by-token', {
+        const response = await fetch('http://localhost:5000/api/v1/get-officer-by-token', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -36,23 +35,24 @@ const AdminProtectedRoute = ({ children }) => {
         const data = await response.json();
         console.log("data", data);
 
-        if (data?.user?.role === 'admin') {
-          // toast.success('Authorized');
+        if (data?.badgeId) {
+            // toast.success('Authorized');
           setIsAuthorized(true);
         } else {
-          // alert('Not authorized');
-          toast.error('Not authorized');
+        //   alert('Not authorized');
+            toast.error('Not authorized');
           router.push('/');
         }
       } catch (error) {
         console.error('Error verifying admin:', error);
         // alert('Not authorized');
         toast.error('Not authorized');
+         // router.push('/');
         router.push('/');
       }
     };
 
-    verifyAdmin();
+    verifyOfficer();
   }, [router]);
 
   if (isAuthorized === null) {
@@ -62,4 +62,4 @@ const AdminProtectedRoute = ({ children }) => {
   return <>{children}</>;
 };
 
-export default AdminProtectedRoute;
+export default OfficerProtectedRoute;

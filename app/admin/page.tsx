@@ -8,7 +8,7 @@ export default function DashboardPage() {
       <div className="flex-1 p-6 overflow-auto">
         
         <ComplaintsList />
-        <Toaster richColors position="top-right" />
+        {/* <Toaster richColors position="top-right" /> */}
         
       </div>
     </div>

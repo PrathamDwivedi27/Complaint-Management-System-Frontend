@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Eye } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const MyComplaintList = () => {
   const [complaints, setComplaints] = useState([]);
@@ -32,6 +33,7 @@ const MyComplaintList = () => {
         const data = await res.json();
         console.log("My Complaints:", data.data);
         setComplaints(data.data);
+        toast.success("Fetched my complaints successfully");
       } catch (error) {
         console.error("Error fetching my complaints:", error);
       }
