@@ -85,7 +85,7 @@ export default function RegisterOfficer() {
                   name={field.name}
                   value={form[field.name]}
                   onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                  className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
                   required
                 />
               </div>
@@ -98,7 +98,7 @@ export default function RegisterOfficer() {
                 value={form.category}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400"
               >
                 <option value="">Select Category</option>
                 {categories.map((cat) => (
@@ -117,7 +117,7 @@ export default function RegisterOfficer() {
 
           <button
             type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-8"
+            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-8"
           >
             Register
           </button>

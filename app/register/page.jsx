@@ -57,92 +57,107 @@ export default function RegisterPage() {
     <div className="min-h-screen flex">
       {/* Left: Form Section */}
       <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8 py-16">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white w-full max-w-md p-10 rounded-2xl shadow-xl"
-        >
-          <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">Complaint Portal Register</h2>
+      <form
+  onSubmit={handleSubmit}
+  className="bg-white w-full max-w-2xl p-10 rounded-2xl shadow-xl"
+>
+  <h2 className="text-3xl font-bold mb-6 text-center text-sky-700">
+    Complaint Portal Register
+  </h2>
 
-          <label className="block mb-2 font-semibold text-gray-700">Name</label>
-          <input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            required
-          />
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label className="block mb-1 font-semibold text-gray-700">Name</label>
+      <input
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+        required
+      />
+    </div>
 
-          <label className="block mb-2 font-semibold text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            required
-          />
+    <div>
+      <label className="block mb-1 font-semibold text-gray-700">Email</label>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+        required
+      />
+    </div>
 
-          <label className="block mb-2 font-semibold text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            required
-          />
+    <div>
+      <label className="block mb-1 font-semibold text-gray-700">Password</label>
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+        required
+      />
+    </div>
 
-          <label className="block mb-2 font-semibold text-gray-700">Phone</label>
-          <input
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            required
-          />
+    <div>
+      <label className="block mb-1 font-semibold text-gray-700">Phone</label>
+      <input
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+        required
+      />
+    </div>
 
-          <label className="block mb-2 font-semibold text-gray-700">Role</label>
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-          >
-            <option value="citizen">Citizen</option>
-            <option value="admin">Admin</option>
-          </select>
+    <div>
+      <label className="block mb-1 font-semibold text-gray-700">Role</label>
+      <select
+        name="role"
+        value={formData.role}
+        onChange={handleChange}
+        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+      >
+        <option value="citizen">Citizen</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
 
-          {formData.role === 'admin' && (
-            <>
-              <label className="block mb-2 font-semibold text-gray-700">Admin Secret</label>
-              <input
-                name="adminSecret"
-                value={formData.adminSecret}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                required
-              />
-            </>
-          )}
+    {formData.role === 'admin' && (
+      <div>
+        <label className="block mb-1 font-semibold text-gray-700">Admin Secret</label>
+        <input
+          name="adminSecret"
+          value={formData.adminSecret}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+          required
+        />
+      </div>
+    )}
+  </div>
 
-          <button
-            type="submit"
-            className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-          >
-            Register
-          </button>
+  <button
+    type="submit"
+    className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 mt-6"
+  >
+    Register
+  </button>
 
-          <div className="mt-6 text-center">
-            <span className="text-gray-600">Already have an account?</span>
-            <button
-              type="button"
-              onClick={() => router.push('/login')}
-              className="ml-2 text-sky-600 hover:underline font-medium cursor-pointer"
-            >
-              Login
-            </button>
-          </div>
-        </form>
+  <div className="mt-6 text-center">
+    <span className="text-gray-600">Already have an account?</span>
+    <button
+      type="button"
+      onClick={() => router.push('/login')}
+      className="ml-2 text-sky-600 hover:underline font-medium cursor-pointer"
+    >
+      Login
+    </button>
+  </div>
+</form>
+
       </div>
 
       {/* Right: Image and Message */}
