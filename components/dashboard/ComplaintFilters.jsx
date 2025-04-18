@@ -99,6 +99,9 @@ export default function ComplaintFilters({setStatus, setCategory, setLocation}) 
             <SelectItem value="completed" className="border-l-4 border-emerald-500 pl-3 cursor-pointer">
                 <span className="text-emerald-600">Completed</span>
             </SelectItem>
+            <SelectItem value="rejected" className="border-l-4 border-rose-500 pl-3 cursor-pointer">
+                <span className="text-rose-600">Rejected</span>
+            </SelectItem>
             </SelectContent>
 
         </Select>
