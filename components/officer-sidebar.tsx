@@ -10,7 +10,7 @@ export function OfficerSidebar() {
   const links = [
     { href: "/officer", label: "Home", icon: Home },
     { href: "/officer/profile", label: "Profile", icon: User },
-    { href: "/officer", label: "User Dashboard", icon: Users2 }, // You can change this route
+    { href: "/officer/all-officers", label: "Officer Department", icon: Users2 }, // You can change this route
     { href: "/contact", label: "Contact Us", icon: Contact2 },
   ]
 

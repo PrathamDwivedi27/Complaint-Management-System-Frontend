@@ -122,14 +122,14 @@ export function StatusChangeDialog({ open, onOpenChange, complaint, onStatusChan
           </div>
         </div>
         <DialogFooter className="sm:justify-between">
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <Button type="button" variant="outline"className="cursor-pointer" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
           <Button
             type="button"
             onClick={handleSubmit}
             disabled={!remarks.trim() || isSubmitting || newStatus === complaint?.status}
-            className="bg-sky-500 hover:bg-sky-600 text-white"
+            className="bg-sky-500 hover:bg-sky-600 text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Updating..." : "Update Status"}
           </Button>

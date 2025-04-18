@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { MessageSquare } from "lucide-react"
+import { useState } from "react";
+import { MessageSquare } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -11,27 +11,28 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 interface AddRemarksDialogProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  complaint: any
-  onAddRemark: (complaintId: string, remark: string) => void
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  complaint: any;
+  onAddRemark: (complaintId: string, remark: string) => void;
 }
 
-export function AddRemarksDialog({ open, onOpenChange, complaint, onAddRemark }: AddRemarksDialogProps) {
-  const [remarks, setRemarks] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [newStatus, setNewStatus] = useState(complaint?.status || "assigned")
-
-
+export function AddRemarksDialog({
+  open,
+  onOpenChange,
+  complaint,
+  onAddRemark,
+}: AddRemarksDialogProps) {
+  const [remarks, setRemarks] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [newStatus, setNewStatus] = useState(complaint?.status || "assigned");
 
   const handleSubmit = async () => {
-    
-
     setIsSubmitting(true);
     console.log("making request");
 
@@ -39,70 +40,78 @@ export function AddRemarksDialog({ open, onOpenChange, complaint, onAddRemark }:
     console.log("newStatus", newStatus);
     console.log("remarks", remarks);
 
-
     try {
-      const response = await fetch("http://localhost:5000/api/v1/complaint/status", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-        
-        body: JSON.stringify({
-          id: complaint._id,
-          status: newStatus,
-          remarks: remarks,
-        }),
-      })
+      const response = await fetch(
+        "http://localhost:5000/api/v1/complaint/status",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+
+          body: JSON.stringify({
+            id: complaint._id,
+            status: newStatus,
+            remarks: remarks,
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Failed to update status")
+        throw new Error("Failed to update status");
       }
-      const data = await response.json()
-      console.log("Status updated successfully:", data)
-      
-      setRemarks("")
-      onOpenChange(false)
+      const data = await response.json();
+      console.log("Status updated successfully:", data);
+
+      setRemarks("");
+      onOpenChange(false);
     } catch (error) {
-      console.error("Error updating status:", error)
+      console.error("Error updating status:", error);
       // Optional: toast/error handling here
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   // Reset form when dialog opens
   const handleOpenChange = (open: boolean) => {
     if (open) {
-      setRemarks("")
+      setRemarks("");
     }
-    onOpenChange(open)
-  }
+    onOpenChange(open);
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add Remarks</DialogTitle>
-          <DialogDescription>Add additional information or updates about this complaint.</DialogDescription>
+          <DialogDescription>
+            Add additional information or updates about this complaint.
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="bg-sky-50 p-3 rounded-md">
             <h4 className="font-medium">{complaint?.title}</h4>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-sm text-gray-600">Status:</span>
-              <span className="text-sm font-medium capitalize">{complaint?.status.replace("_", " ")}</span>
+              <span className="text-sm font-medium capitalize">
+                {complaint?.status.replace("_", " ")}
+              </span>
             </div>
           </div>
 
-          {(complaint?.remarks.length > 0 ) && (
+          {complaint?.remarks.length > 0 && (
             <div className="space-y-2">
               <Label>Previous Remarks</Label>
               <div className="max-h-[150px] overflow-y-auto bg-gray-50 p-3 rounded-md space-y-2">
-                {complaint.remarks.map((remark: any, index: number) => (
-                  <div key={index} className="text-sm">
-                    <div className="text-xs text-gray-500">{new Date(remark.timestamp).toLocaleString()}</div>
-                    <div className="text-gray-700">{remark.text}</div>
+                {complaint.remarks.map((remark: [], index: number) => (
+                  <div
+                    key={index}
+                    className="text-sm bg-sky-100 p-2 rounded-md"
+                  >
+                    <div className="text-gray-700">{remark}</div>
                   </div>
                 ))}
               </div>
@@ -124,19 +133,24 @@ export function AddRemarksDialog({ open, onOpenChange, complaint, onAddRemark }:
           </div>
         </div>
         <DialogFooter className="sm:justify-between">
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+          <Button
+            type="button"
+            className="cursor-pointer"
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+          >
             Cancel
           </Button>
           <Button
             type="button"
             onClick={handleSubmit}
             disabled={!remarks.trim() || isSubmitting}
-            className="bg-sky-500 hover:bg-sky-600 text-white"
+            className="bg-sky-500 hover:bg-sky-600 text-white cursor-pointer"
           >
             {isSubmitting ? "Submitting..." : "Submit Remarks"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

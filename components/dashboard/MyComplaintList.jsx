@@ -71,7 +71,7 @@ const MyComplaintList = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex items-center gap-1"
+                      className="flex items-center gap-1 cursor-pointer"
                       onClick={() =>
                         router.push(`/dashboard/mycomplaints/${complaint._id}`)
                       }

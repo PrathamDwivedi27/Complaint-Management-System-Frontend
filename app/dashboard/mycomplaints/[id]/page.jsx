@@ -101,7 +101,7 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                {complaint.remarks && (
+                {complaint.remarks?.length>0 && (
                   <div>
                     <h2 className="font-medium text-gray-700">Remarks</h2>
                     <p className="text-gray-600">{complaint.remarks}</p>

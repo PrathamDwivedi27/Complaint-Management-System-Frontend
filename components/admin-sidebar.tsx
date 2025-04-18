@@ -10,7 +10,7 @@ export function AdminSidebar() {
   const links = [
     { href: "/admin", label: "Home", icon: Home },
     { href: "/admin/profile", label: "Profile", icon: ListCheck },
-    { href: "/dashboard", label: "User Dashboard", icon: Users2 },
+    { href: "/admin/all-users", label: "Users List", icon: Users2 },
     { href: "/contact", label: "Contact Us", icon: Contact2 },
   ];
 
