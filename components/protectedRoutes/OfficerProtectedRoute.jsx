@@ -35,14 +35,10 @@ const OfficerProtectedRoute = ({ children }) => {
         const data = await response.json();
         console.log("data", data);
 
-        if (data?.badgeId) {
+      
             // toast.success('Authorized');
           setIsAuthorized(true);
-        } else {
-        //   alert('Not authorized');
-            toast.error('Not authorized');
-          router.push('/');
-        }
+        
       } catch (error) {
         console.error('Error verifying admin:', error);
         // alert('Not authorized');
